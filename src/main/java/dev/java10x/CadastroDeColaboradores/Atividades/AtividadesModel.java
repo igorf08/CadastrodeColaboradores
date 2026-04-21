@@ -2,12 +2,17 @@ package dev.java10x.CadastroDeColaboradores.Atividades;
 
 import dev.java10x.CadastroDeColaboradores.Colaboradores.ColaboradorModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_atividades")
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AtividadesModel {
 
     @Id
@@ -19,8 +24,7 @@ public class AtividadesModel {
     private String dificuldade;
 
     // @OneToMany - Uma atividade pode conter vários colaboradores.
-    @OneToMany(mappedBy = "missoes")
+    @OneToMany(mappedBy = "atividades")
     private List<ColaboradorModel> colaborador;
-
 
 }
