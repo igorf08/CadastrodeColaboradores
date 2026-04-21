@@ -3,47 +3,32 @@ package dev.java10x.CadastroDeColaboradores.Colaboradores;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("colaboradores")
 public class ColaboradorController {
 
-    @GetMapping("/")
-    public String index() {
-        return "Essa é minha index.";
-    }
-
-    @GetMapping("/boasVindas")
-    public String boasVindas() {
-        return "Essa é minha primeira mensagem nesta rota.";
-    }
-
-    //Adicionar colaborador (Create)
     @PostMapping("/criar")
     public String criarColaborador() {
-        return "Colaborador criado";
+        return "Colaborador criado com sucesso.";
     }
 
-    //Mostrar colaboradores (READ)
     @GetMapping("/todos")
-    public String mostrarTodosOsColaboradores() {
-        return "Mostrar colaborador";
+    public String listarColaboradores() {
+        return "Colaboradores listados com sucesso.";
     }
 
-    //Procurar colaborador Por Id (READ)
     @GetMapping("/todosID")
-    public String mostrarTodosOsColaboradoresPorId() {
-        return "Mostrar colaboradores Por Id";
+    public String listarColaboradoresPorId() {
+        return "Colaborador listado por ID com sucesso.";
     }
 
-    //Alterar dados do colaborador (Update)
     @PutMapping("/alterarID")
     public String alterarColaboradorPorId() {
-        return "Alterar colaboradores por Id";
+        return "Colaborador alterado por ID com sucesso.";
     }
 
-    //Deletar colaborador (Delete)
     @DeleteMapping("/deletarID")
     public String deletarColaboradorPorId() {
-        return "Deletar colaborador por id";
+        return "Colaborador deletado por ID com sucesso.";
     }
 
 }
