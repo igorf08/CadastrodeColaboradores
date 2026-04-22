@@ -3,6 +3,7 @@ package dev.java10x.CadastroDeColaboradores.Colaboradores;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ColaboradorService {
@@ -16,4 +17,10 @@ public class ColaboradorService {
     public List<ColaboradorModel> listarColaboradores(){
         return colaboradoresRepository.findAll();
     }
+
+    public ColaboradorModel listarColaboradores(Long id){
+        Optional<ColaboradorModel> colaboradorPorId = colaboradoresRepository.findById(id);
+        return colaboradorPorId.orElse(null);
+    }
+
 }

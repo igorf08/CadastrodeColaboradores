@@ -24,9 +24,9 @@ public class ColaboradorController {
         return colaboradorService.listarColaboradores();
     }
 
-    @GetMapping("/todosID")
-    public String listarColaboradoresPorId() {
-        return "Colaborador listado por ID com sucesso.";
+    @GetMapping("/listar/{id}")
+    public ColaboradorModel listarColaboradoresPorId(@PathVariable Long id) {
+        return colaboradorService.listarColaboradores(id);
     }
 
     @PutMapping("/alterarID")
