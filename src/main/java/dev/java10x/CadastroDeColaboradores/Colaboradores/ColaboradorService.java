@@ -23,4 +23,8 @@ public class ColaboradorService {
         return colaboradorPorId.orElse(null);
     }
 
+    public ColaboradorModel criarColaborador(ColaboradorModel colaborador){
+        return colaboradoresRepository.save(colaborador);
+    }
+
 }

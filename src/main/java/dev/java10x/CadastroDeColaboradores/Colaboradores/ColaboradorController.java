@@ -15,8 +15,8 @@ public class ColaboradorController {
     }
 
     @PostMapping("/criar")
-    public String criarColaborador() {
-        return "Colaborador criado com sucesso.";
+    public ColaboradorModel criarColaborador(@RequestBody ColaboradorModel colaborador) {
+        return colaboradorService.criarColaborador(colaborador);
     }
 
     @GetMapping("/todos")
