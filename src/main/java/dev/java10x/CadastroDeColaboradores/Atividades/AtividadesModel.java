@@ -1,5 +1,6 @@
 package dev.java10x.CadastroDeColaboradores.Atividades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.CadastroDeColaboradores.Colaboradores.ColaboradorModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class AtividadesModel {
 
     // @OneToMany - Uma atividade pode conter vários colaboradores.
     @OneToMany(mappedBy = "atividades")
+    @JsonIgnore
     private List<ColaboradorModel> colaborador;
 
 }
