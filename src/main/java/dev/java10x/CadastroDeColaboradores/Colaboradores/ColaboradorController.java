@@ -2,9 +2,17 @@ package dev.java10x.CadastroDeColaboradores.Colaboradores;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("colaboradores")
 public class ColaboradorController {
+
+    private ColaboradorService colaboradorService;
+
+    public ColaboradorController(ColaboradorService colaboradorService) {
+        this.colaboradorService = colaboradorService;
+    }
 
     @PostMapping("/criar")
     public String criarColaborador() {
@@ -12,8 +20,8 @@ public class ColaboradorController {
     }
 
     @GetMapping("/todos")
-    public String listarColaboradores() {
-        return "Colaboradores listados com sucesso.";
+    public List<ColaboradorModel> listarColaboradores() {
+        return colaboradorService.listarColaboradores();
     }
 
     @GetMapping("/todosID")
