@@ -15,7 +15,7 @@ public class ColaboradorController {
     }
 
     @PostMapping("/criar")
-    public ColaboradorModel criarColaborador(@RequestBody ColaboradorModel colaborador) {
+    public ColaboradoresDTO criarColaborador(@RequestBody ColaboradoresDTO colaborador) {
         return colaboradorService.criarColaborador(colaborador);
     }
 

@@ -9,9 +9,11 @@ import java.util.Optional;
 public class ColaboradorService {
 
     private ColaboradoresRepository colaboradoresRepository;
+    private ColaboradoresMapper colaboradoresMapper;
 
-    public ColaboradorService(ColaboradoresRepository colaboradoresRepository) {
+    public ColaboradorService(ColaboradoresRepository colaboradoresRepository, ColaboradoresMapper colaboradoresMapper) {
         this.colaboradoresRepository = colaboradoresRepository;
+        this.colaboradoresMapper = colaboradoresMapper;
     }
 
     public List<ColaboradorModel> listarColaboradores(){
@@ -23,8 +25,10 @@ public class ColaboradorService {
         return colaboradorPorId.orElse(null);
     }
 
-    public ColaboradorModel criarColaborador(ColaboradorModel colaborador){
-        return colaboradoresRepository.save(colaborador);
+    public ColaboradoresDTO criarColaborador(ColaboradoresDTO colaboradorDTO){
+        ColaboradorModel colaborador = colaboradoresMapper.map(colaboradorDTO);
+        colaborador = colaboradoresRepository.save(colaborador);
+        return colaboradoresMapper.map(colaborador);
     }
 
     public void deletarColaborador(Long id){

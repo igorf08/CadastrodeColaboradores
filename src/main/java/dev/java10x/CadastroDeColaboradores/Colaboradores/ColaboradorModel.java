@@ -24,6 +24,9 @@ public class ColaboradorModel {
 
     private String funcao;
 
+    @Column (name = "modelo_contratacao")
+    private String modeloContratacao;
+
     // @ManyToOne - Um colaborador só pode ter uma missão.
     @ManyToOne
     @JoinColumn(name = "atividades_id") // Foreign Key
