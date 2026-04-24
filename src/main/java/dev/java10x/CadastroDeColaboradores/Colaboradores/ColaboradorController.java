@@ -34,9 +34,9 @@ public class ColaboradorController {
         return "Colaborador alterado por ID com sucesso.";
     }
 
-    @DeleteMapping("/deletarID")
-    public String deletarColaboradorPorId() {
-        return "Colaborador deletado por ID com sucesso.";
+    @DeleteMapping("/deletar/{id}")
+    public void deletarColaboradorPorId(@PathVariable Long id) {
+        colaboradorService.deletarColaborador(id);
     }
 
 }

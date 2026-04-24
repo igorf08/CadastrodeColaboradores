@@ -27,4 +27,10 @@ public class ColaboradorService {
         return colaboradoresRepository.save(colaborador);
     }
 
+    public void deletarColaborador(Long id){
+        colaboradoresRepository.deleteById(id);
+    }
+
+
+
 }
