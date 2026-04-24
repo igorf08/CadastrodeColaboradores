@@ -29,9 +29,9 @@ public class ColaboradorController {
         return colaboradorService.listarColaboradores(id);
     }
 
-    @PutMapping("/alterarID")
-    public String alterarColaboradorPorId() {
-        return "Colaborador alterado por ID com sucesso.";
+    @PutMapping("/alterar/{id}")
+    public ColaboradorModel alterarColaboradorPorId(@PathVariable Long id, @RequestBody ColaboradorModel colaboradorAtualizado) {
+        return colaboradorService.editarColaborador(id, colaboradorAtualizado);
     }
 
     @DeleteMapping("/deletar/{id}")

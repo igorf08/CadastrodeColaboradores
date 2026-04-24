@@ -31,6 +31,14 @@ public class ColaboradorService {
         colaboradoresRepository.deleteById(id);
     }
 
+    public ColaboradorModel editarColaborador(Long id, ColaboradorModel colaboradorAtualizado){
+        if (colaboradoresRepository.existsById(id)) {
+            colaboradorAtualizado.setId(id);
+            return colaboradoresRepository.save(colaboradorAtualizado);
+        }
+        return null;
+    }
+
 
 
 }
