@@ -1,0 +1,1 @@
+-- Migration descontinuada. Coluna modelo_contratacao gerenciada pelo Hibernate.
