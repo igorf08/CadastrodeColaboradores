@@ -4,41 +4,49 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ColaboradorService {
 
     private ColaboradoresRepository colaboradoresRepository;
+    private ColaboradoresMapper colaboradoresMapper;
 
-    public ColaboradorService(ColaboradoresRepository colaboradoresRepository) {
+    public ColaboradorService(ColaboradoresRepository colaboradoresRepository, ColaboradoresMapper colaboradoresMapper) {
         this.colaboradoresRepository = colaboradoresRepository;
+        this.colaboradoresMapper = colaboradoresMapper;
     }
 
-    public List<ColaboradorModel> listarColaboradores(){
-        return colaboradoresRepository.findAll();
+    public List<ColaboradoresDTO> listarColaboradores(){
+        List<ColaboradorModel> colaboradores = colaboradoresRepository.findAll();
+        return colaboradores.stream()
+                .map(colaboradoresMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public ColaboradorModel listarColaboradores(Long id){
+    public ColaboradoresDTO listarColaboradores(Long id){
         Optional<ColaboradorModel> colaboradorPorId = colaboradoresRepository.findById(id);
-        return colaboradorPorId.orElse(null);
+        return colaboradorPorId.map(colaboradoresMapper::map).orElse(null);
     }
 
-    public ColaboradorModel criarColaborador(ColaboradorModel colaborador){
-        return colaboradoresRepository.save(colaborador);
+    public ColaboradoresDTO criarColaborador(ColaboradoresDTO colaboradorDTO){
+        ColaboradorModel colaborador = colaboradoresMapper.map(colaboradorDTO);
+        colaborador = colaboradoresRepository.save(colaborador);
+        return colaboradoresMapper.map(colaborador);
     }
 
     public void deletarColaborador(Long id){
         colaboradoresRepository.deleteById(id);
     }
 
-    public ColaboradorModel editarColaborador(Long id, ColaboradorModel colaboradorAtualizado){
-        if (colaboradoresRepository.existsById(id)) {
+    public ColaboradoresDTO editarColaborador(Long id, ColaboradoresDTO colaboradorDTO){
+        Optional<ColaboradorModel> colaborador = colaboradoresRepository.findById(id);
+        if (colaborador.isPresent()) {
+            ColaboradorModel colaboradorAtualizado = colaboradoresMapper.map(colaboradorDTO);
             colaboradorAtualizado.setId(id);
-            return colaboradoresRepository.save(colaboradorAtualizado);
+            ColaboradorModel colaboradorSalvo = colaboradoresRepository.save(colaboradorAtualizado);
+            return colaboradoresMapper.map(colaboradorSalvo);
         }
         return null;
     }
-
-
-
 }
