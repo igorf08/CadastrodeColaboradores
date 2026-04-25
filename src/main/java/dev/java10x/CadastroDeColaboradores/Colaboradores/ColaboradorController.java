@@ -1,5 +1,8 @@
 package dev.java10x.CadastroDeColaboradores.Colaboradores;
 
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +18,56 @@ public class ColaboradorController {
     }
 
     @PostMapping("/criar")
-    public ColaboradoresDTO criarColaborador(@RequestBody ColaboradoresDTO colaborador) {
-        return colaboradorService.criarColaborador(colaborador);
+    public ResponseEntity<String> criarColaborador(@RequestBody ColaboradoresDTO colaborador) {
+        ColaboradoresDTO novoColaborador = colaboradorService.criarColaborador(colaborador);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Colaborador criado com sucesso.\n" + "ID: " + novoColaborador.getId() + " Nome: " + novoColaborador.getNome());
     }
 
     @GetMapping("/todos")
-    public List<ColaboradoresDTO> listarColaboradores() {
-        return colaboradorService.listarColaboradores();
+    public ResponseEntity<List<ColaboradoresDTO>> listarColaboradores() {
+        List<ColaboradoresDTO> colaboradores = colaboradorService.listarColaboradores();
+        return ResponseEntity.ok(colaboradores);
     }
 
     @GetMapping("/listar/{id}")
-    public ColaboradoresDTO listarColaboradoresPorId(@PathVariable Long id) {
-        return colaboradorService.listarColaboradores(id);
+    public ResponseEntity<?> listarColaboradoresPorId(@PathVariable Long id) {
+
+        ColaboradoresDTO colaborador = colaboradorService.listarColaboradores(id);
+
+        if (colaborador != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(colaborador);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi encontrado nenhum colaborador com este ID.");
+        }
     }
 
     @PutMapping("/alterar/{id}")
-    public ColaboradoresDTO alterarColaboradorPorId(@PathVariable Long id, @RequestBody ColaboradoresDTO colaboradorAtualizado) {
-        return colaboradorService.editarColaborador(id, colaboradorAtualizado);
+    public ResponseEntity<?> alterarColaboradorPorId(@PathVariable Long id, @RequestBody ColaboradoresDTO colaboradorAtualizado) {
+
+        ColaboradoresDTO colaborador = colaboradorService.editarColaborador(id, colaboradorAtualizado);
+
+        if (colaborador != null) {
+            return ResponseEntity.ok(colaboradorAtualizado);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Não foi encontrado um colaborador com id " + id + ".");
+        }
+
     }
 
     @DeleteMapping("/deletar/{id}")
-    public void deletarColaboradorPorId(@PathVariable Long id) {
-        colaboradorService.deletarColaborador(id);
+    public ResponseEntity<String> deletarColaboradorPorId(@PathVariable Long id) {
+
+        ColaboradoresDTO colaborador = colaboradorService.listarColaboradores(id);
+
+        if (colaborador != null) {
+            colaboradorService.deletarColaborador(id);
+            return ResponseEntity.ok("Seu colaborador foi excluído.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Não foi encontrado um colaborador com id " + id + ".");
+        }
     }
 
 }
