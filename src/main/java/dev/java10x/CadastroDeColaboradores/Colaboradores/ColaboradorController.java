@@ -20,17 +20,17 @@ public class ColaboradorController {
     }
 
     @GetMapping("/todos")
-    public List<ColaboradorModel> listarColaboradores() {
+    public List<ColaboradoresDTO> listarColaboradores() {
         return colaboradorService.listarColaboradores();
     }
 
     @GetMapping("/listar/{id}")
-    public ColaboradorModel listarColaboradoresPorId(@PathVariable Long id) {
+    public ColaboradoresDTO listarColaboradoresPorId(@PathVariable Long id) {
         return colaboradorService.listarColaboradores(id);
     }
 
     @PutMapping("/alterar/{id}")
-    public ColaboradorModel alterarColaboradorPorId(@PathVariable Long id, @RequestBody ColaboradorModel colaboradorAtualizado) {
+    public ColaboradoresDTO alterarColaboradorPorId(@PathVariable Long id, @RequestBody ColaboradoresDTO colaboradorAtualizado) {
         return colaboradorService.editarColaborador(id, colaboradorAtualizado);
     }
 

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ColaboradoresMapper {
+
     public ColaboradorModel map(ColaboradoresDTO colaboradoresDTO) {
 
         ColaboradorModel colaboradorModel = new ColaboradorModel();
