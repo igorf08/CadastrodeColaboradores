@@ -24,8 +24,11 @@ public class ColaboradorModel {
 
     private String funcao;
 
-    @Column (name = "modelo_contratacao")
+    @Column(name = "modelo_contratacao")
     private String modeloContratacao;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     // @ManyToOne - Um colaborador só pode ter uma missão.
     @ManyToOne
