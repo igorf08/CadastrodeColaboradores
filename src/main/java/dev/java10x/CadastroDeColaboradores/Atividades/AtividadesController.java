@@ -2,29 +2,42 @@ package dev.java10x.CadastroDeColaboradores.Atividades;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("missoes")
+@RequestMapping("atividades")
 public class AtividadesController {
 
+    private AtividadesService atividadesService;
 
-    @GetMapping("/listar")
-    public String listarMissoes() {
-        return "Missões listadas com sucesso.";
+    public AtividadesController(AtividadesService atividadesService) {
+        this.atividadesService = atividadesService;
     }
 
     @PostMapping("/criar")
-    public String criarMissao() {
-        return "Missão criada com sucesso.";
+    public AtividadesModel criarAtividade(@RequestBody AtividadesModel atividade) {
+        return atividadesService.criarAtividade(atividade);
     }
 
-    @PutMapping("/alterar")
-    public String alterarMissao() {
-        return "Missão alterada com sucesso.";
+    @GetMapping("/listar")
+    public List<AtividadesModel> listarAtividades() {
+        return atividadesService.listarAtividades();
     }
 
-    @DeleteMapping("/deletar")
-    public String deletarMissao() {
-        return "Missão deletar com sucesso.";
+    @GetMapping("/listar/{id}")
+    public AtividadesModel listarAtividadePorId(@PathVariable Long id) {
+        return atividadesService.listarAtividadePorId(id);
+    }
+
+
+    @PutMapping("/editar/{id}")
+    public AtividadesModel editarAtividade(@PathVariable Long id, @RequestBody AtividadesModel atividade) {
+        return atividadesService.editarAtividade(id, atividade);
+    }
+
+    @DeleteMapping("/deletar/{id}")
+    public void deletarAtividade(@PathVariable Long id) {
+        atividadesService.deletarAtividade(id);
     }
 
 }
