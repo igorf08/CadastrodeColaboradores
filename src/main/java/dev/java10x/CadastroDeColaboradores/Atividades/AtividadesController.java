@@ -15,23 +15,23 @@ public class AtividadesController {
     }
 
     @PostMapping("/criar")
-    public AtividadesModel criarAtividade(@RequestBody AtividadesModel atividade) {
+    public AtividadesDTO criarAtividade(@RequestBody AtividadesDTO atividade) {
         return atividadesService.criarAtividade(atividade);
     }
 
     @GetMapping("/listar")
-    public List<AtividadesModel> listarAtividades() {
+    public List<AtividadesDTO> listarAtividades() {
         return atividadesService.listarAtividades();
     }
 
     @GetMapping("/listar/{id}")
-    public AtividadesModel listarAtividadePorId(@PathVariable Long id) {
+    public AtividadesDTO listarAtividadePorId(@PathVariable Long id) {
         return atividadesService.listarAtividadePorId(id);
     }
 
 
     @PutMapping("/editar/{id}")
-    public AtividadesModel editarAtividade(@PathVariable Long id, @RequestBody AtividadesModel atividade) {
+    public AtividadesDTO editarAtividade(@PathVariable Long id, @RequestBody AtividadesDTO atividade) {
         return atividadesService.editarAtividade(id, atividade);
     }
 

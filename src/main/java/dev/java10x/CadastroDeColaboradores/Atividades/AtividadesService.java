@@ -1,6 +1,5 @@
 package dev.java10x.CadastroDeColaboradores.Atividades;
 
-import dev.java10x.CadastroDeColaboradores.Colaboradores.ColaboradorModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,31 +8,44 @@ import java.util.Optional;
 @Service
 public class AtividadesService {
     private AtividadesRepository atividadesRepository;
+    private AtividadesMapper atividadesMapper;
 
-    public AtividadesService(AtividadesRepository atividadesRepository) {
+
+    public AtividadesService(AtividadesRepository atividadesRepository, AtividadesMapper atividadesMapper) {
         this.atividadesRepository = atividadesRepository;
+        this.atividadesMapper = atividadesMapper;
     }
 
-    public AtividadesModel criarAtividade(AtividadesModel atividade) {
-        return atividadesRepository.save(atividade);
+    public AtividadesDTO criarAtividade(AtividadesDTO atividadeDTO) {
+        AtividadesModel atividade = atividadesMapper.map(atividadeDTO);
+        atividade = atividadesRepository.save(atividade);
+        return atividadesMapper.map(atividade);
     }
 
-    public List<AtividadesModel> listarAtividades() {
-        return atividadesRepository.findAll();
+    public List<AtividadesDTO> listarAtividades() {
+        List<AtividadesModel> atividades = atividadesRepository.findAll();
+        return atividades.stream()
+                .map(atividadesMapper::map)
+                .toList();
     }
 
-    public AtividadesModel listarAtividadePorId(Long id) {
-        return atividadesRepository.findById(id).orElse(null);
+
+    public AtividadesDTO listarAtividadePorId(Long id) {
+        Optional<AtividadesModel> atividade = atividadesRepository.findById(id);
+        return atividade.map(atividadesMapper::map).orElse(null);
     }
 
-    public AtividadesModel editarAtividade(Long id, AtividadesModel atividade) {
+    public AtividadesDTO editarAtividade(Long id, AtividadesDTO atividade) {
         Optional<AtividadesModel> atividadeExistente = atividadesRepository.findById(id);
         if (atividadeExistente.isPresent()) {
             atividade.setId(id);
-            return atividadesRepository.save(atividade);
+            AtividadesModel atividadeModel = atividadesMapper.map(atividade);
+            atividadesRepository.save(atividadeModel);
+            return atividadesMapper.map(atividadeModel);
         }
         return null;
     }
+
 
     public void deletarAtividade(Long id) {
         atividadesRepository.deleteById(id);
