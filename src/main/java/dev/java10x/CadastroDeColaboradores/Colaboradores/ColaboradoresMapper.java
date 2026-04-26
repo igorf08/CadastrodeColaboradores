@@ -14,7 +14,7 @@ public class ColaboradoresMapper {
         colaboradorModel.setFuncao(colaboradoresDTO.getFuncao());
         colaboradorModel.setModeloContratacao(colaboradoresDTO.getModeloContratacao());
         colaboradorModel.setAtividades(colaboradoresDTO.getAtividades());
-
+        colaboradorModel.setImgUrl(colaboradoresDTO.getImgUrl());
         return colaboradorModel;
     }
 
@@ -27,7 +27,7 @@ public class ColaboradoresMapper {
         colaboradoresDTO.setFuncao(colaboradorModel.getFuncao());
         colaboradoresDTO.setModeloContratacao(colaboradorModel.getModeloContratacao());
         colaboradoresDTO.setAtividades(colaboradorModel.getAtividades());
-
+        colaboradoresDTO.setImgUrl(colaboradorModel.getImgUrl());
         return colaboradoresDTO;
     }
 }

@@ -16,5 +16,6 @@ public class ColaboradoresDTO {
     private String funcao;
     private AtividadesModel atividades;
     private String modeloContratacao;
+    private String imgUrl;
 
 }
