@@ -1,0 +1,121 @@
+:root {
+    --primary-color: #4f46e5;
+    --secondary-color: #64748b;
+    --bg-color: #f8fafc;
+    --text-color: #1e293b;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 24px;
+}
+
+.profile-card {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 650px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--border-color);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    margin: 0 0 10px 0;
+    color: #1e293b;
+    font-size: 1.5rem;
+}
+
+.info-section {
+    text-align: left;
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 25px 0;
+}
+
+.info-section p {
+    margin: 10px 0;
+    color: #475569;
+}
+
+.info-section strong {
+    color: var(--text-color);
+}
+
+h3 {
+    text-align: left;
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-top: 30px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    text-align: left;
+    padding: 12px;
+    background: #f8fafc;
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.badge-difficulty {
+    background: #e0e7ff;
+    color: #4338ca;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.btn-back {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-back:hover {
+    color: var(--primary-color);
+    transform: translateX(-5px);
+}

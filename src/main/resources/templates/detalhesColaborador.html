@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Colaborador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/detalhesColaborador.css}" />
+</head>
+<body>
+
+<h1>Visualizar Cadastro</h1>
+
+<div class="profile-card">
+    <img th:src="${colaborador.imgUrl ?: 'https://via.placeholder.com/160'}"
+         class="profile-img"
+         th:alt="${colaborador.nome}" />
+
+    <h2 th:text="${colaborador.nome}"></h2>
+
+    <div class="info-section">
+        <p><strong>Email:</strong> <span th:text="${colaborador.email}"></span></p>
+        <p><strong>Função:</strong> <span th:text="${colaborador.funcao}"></span></p>
+        <p><strong>Contratação:</strong> <span th:text="${colaborador.modeloContratacao}"></span></p>
+    </div>
+
+    <h3>Atividades em Aberto</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome da Atividade</th>
+            <th>Dificuldade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="atividade : ${colaborador.atividades}">
+            <td th:text="${atividade.nome}" style="font-weight: 500;"></td>
+            <td>
+                <span class="badge-difficulty" th:text="${atividade.dificuldade}"></span>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(colaborador.atividades)}">
+            <td colspan="2" style="text-align: center; color: #94a3b8; font-style: italic; padding: 20px;">
+                Nenhuma atividade vinculada.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a href="/colaboradores/ui/listar" class="btn-back">← Voltar para a lista</a>
+
+</body>
+</html>
