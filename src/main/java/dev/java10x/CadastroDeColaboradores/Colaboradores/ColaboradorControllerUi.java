@@ -4,10 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -18,6 +16,12 @@ public class ColaboradorControllerUi {
 
     public ColaboradorControllerUi(ColaboradorService colaboradorService) {
         this.colaboradorService = colaboradorService;
+    }
+
+    @GetMapping("/criar")
+    public String criarColaborador(ColaboradoresDTO colaborador, Model model) {
+        model.addAttribute("colaborador", new ColaboradoresDTO());
+        return "adicionarColaborador";
     }
 
     @GetMapping("/listar")
@@ -39,12 +43,19 @@ public class ColaboradorControllerUi {
         ColaboradoresDTO colaborador = colaboradorService.listarColaboradorPorId(id);
 
           colaboradorService.listarColaboradorPorId(id);
-          model.addAttribute("colaboradores", colaborador);
+          model.addAttribute("colaborador", colaborador);
           if (colaborador != null) {
             return "detalhesColaborador";
           } else {
               model.addAttribute("mensagem", "Colaborador não encontrado.");
               return "redirect:/colaboradores/ui/listar";
           }
+    }
+
+    @PostMapping("salvar")
+    public String salvarColaborador(@ModelAttribute ColaboradoresDTO colaborador, RedirectAttributes redirectAttributes) {
+        colaboradorService.criarColaborador(colaborador);
+        redirectAttributes.addFlashAttribute("mensagem", "Colaborador cadastrado.");
+        return "redirect:/colaboradores/ui/listar";
     }
 }
