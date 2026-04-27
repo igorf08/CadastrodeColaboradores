@@ -1,6 +1,5 @@
 package dev.java10x.CadastroDeColaboradores.Colaboradores;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,16 +23,16 @@ public class ColaboradorController {
                 .body("Colaborador criado com sucesso.\n" + "ID: " + novoColaborador.getId() + " Nome: " + novoColaborador.getNome());
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/listar")
     public ResponseEntity<List<ColaboradoresDTO>> listarColaboradores() {
         List<ColaboradoresDTO> colaboradores = colaboradorService.listarColaboradores();
         return ResponseEntity.ok(colaboradores);
     }
 
     @GetMapping("/listar/{id}")
-    public ResponseEntity<?> listarColaboradoresPorId(@PathVariable Long id) {
+    public ResponseEntity<?> listarColaboradorPorId(@PathVariable Long id) {
 
-        ColaboradoresDTO colaborador = colaboradorService.listarColaboradores(id);
+        ColaboradoresDTO colaborador = colaboradorService.listarColaboradorPorId(id);
 
         if (colaborador != null) {
             return ResponseEntity.status(HttpStatus.OK).body(colaborador);
@@ -42,8 +41,8 @@ public class ColaboradorController {
         }
     }
 
-    @PutMapping("/alterar/{id}")
-    public ResponseEntity<?> alterarColaboradorPorId(@PathVariable Long id, @RequestBody ColaboradoresDTO colaboradorAtualizado) {
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<?> editarColaboradorPorId(@PathVariable Long id, @RequestBody ColaboradoresDTO colaboradorAtualizado) {
 
         ColaboradoresDTO colaborador = colaboradorService.editarColaborador(id, colaboradorAtualizado);
 
@@ -57,9 +56,9 @@ public class ColaboradorController {
     }
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<String> deletarColaboradorPorId(@PathVariable Long id) {
+    public ResponseEntity<String> deletarColaborador(@PathVariable Long id) {
 
-        ColaboradoresDTO colaborador = colaboradorService.listarColaboradores(id);
+        ColaboradoresDTO colaborador = colaboradorService.listarColaboradorPorId(id);
 
         if (colaborador != null) {
             colaboradorService.deletarColaborador(id);
