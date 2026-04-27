@@ -28,7 +28,7 @@ public class AtividadesController {
         return ResponseEntity.ok(atividades);
     }
 
-    @GetMapping("/listar/{id]")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<?> listarAtividadePorId(@PathVariable Long id) {
         AtividadesDTO atividade = atividadesService.listarAtividadePorId(id);
         if (atividade != null) {
