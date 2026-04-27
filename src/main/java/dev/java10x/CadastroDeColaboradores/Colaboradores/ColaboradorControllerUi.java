@@ -1,5 +1,7 @@
 package dev.java10x.CadastroDeColaboradores.Colaboradores;
 
+import dev.java10x.CadastroDeColaboradores.Atividades.AtividadesDTO;
+import dev.java10x.CadastroDeColaboradores.Atividades.AtividadesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,14 +15,18 @@ import java.util.List;
 @RequestMapping("/colaboradores/ui")
 public class ColaboradorControllerUi {
     private final ColaboradorService colaboradorService;
+    private final AtividadesService atividadesService;
 
-    public ColaboradorControllerUi(ColaboradorService colaboradorService) {
+    public ColaboradorControllerUi(ColaboradorService colaboradorService, AtividadesService atividadesService) {
         this.colaboradorService = colaboradorService;
+        this.atividadesService = atividadesService;
     }
 
     @GetMapping("/criar")
     public String criarColaborador(ColaboradoresDTO colaborador, Model model) {
+        List<AtividadesDTO> atividades = atividadesService.listarAtividades();
         model.addAttribute("colaborador", new ColaboradoresDTO());
+        model.addAttribute("atividades", atividades);
         return "adicionarColaborador";
     }
 
