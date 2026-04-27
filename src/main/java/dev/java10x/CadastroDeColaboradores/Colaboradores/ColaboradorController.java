@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("colaboradores")
 public class ColaboradorController {
 
-    private ColaboradorService colaboradorService;
+    private final ColaboradorService colaboradorService;
 
     public ColaboradorController(ColaboradorService colaboradorService) {
         this.colaboradorService = colaboradorService;
