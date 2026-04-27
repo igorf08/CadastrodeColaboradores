@@ -40,6 +40,16 @@
             <input type="text" id="modeloContratacao" th:field="*{modeloContratacao}" placeholder="Ex: CLT, PJ ou Estágio" />
         </div>
 
+        <div class="form-group">
+            <label for="atividades">Atividade</label>
+            <select id="atividades" th:field="*{atividades.id}">
+                <option value="" th:text="'Selecione uma atividade'"></option>
+                <option th:each="atv : ${atividades}"
+                        th:value="${atv.id}"
+                        th:text="${atv.nome}"></option>
+            </select>
+        </div>
+
         <button type="submit" class="btn-submit">Cadastrar Colaborador</button>
     </form>
 </div>
