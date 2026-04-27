@@ -24,7 +24,7 @@ public class ColaboradorService {
                 .collect(Collectors.toList());
     }
 
-    public ColaboradoresDTO listarColaboradores(Long id){
+    public ColaboradoresDTO listarColaboradorPorId(Long id){
         Optional<ColaboradorModel> colaboradorPorId = colaboradoresRepository.findById(id);
         return colaboradorPorId.map(colaboradoresMapper::map).orElse(null);
     }
